@@ -2,6 +2,9 @@
 ### Do not make changes to this file directly
 
 
+"""DateTime"""
+scalar DateTime
+
 type Mutation {
   createDraft(authorEmail: String, content: String, title: String): Post!
   deleteOnePost(where: PostWhereUniqueInput!): Post
@@ -23,9 +26,11 @@ input PostCreateManyWithoutPostsInput {
 
 input PostCreateWithoutAuthorInput {
   content: String
+  createdAt: DateTime
   id: ID
   published: Boolean!
   title: String!
+  updatedAt: DateTime
 }
 
 input PostWhereUniqueInput {
@@ -33,9 +38,10 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  feed: [Post!]!
+  feed(published: Boolean): [Post!]!
   filterPosts(searchString: String): [Post!]!
   post(where: PostWhereUniqueInput!): Post
+  users: [User!]!
 }
 
 type User {
