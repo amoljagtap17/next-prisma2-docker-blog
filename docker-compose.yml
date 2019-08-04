@@ -24,32 +24,32 @@ services:
       dockerfile: Dockerfile
     volumes:
       - /app/prisma
-    backend:
-      links:
-        - mysql
-      depends_on:
-        - mysql
-      container_name: backend
-      ports:
-        - '4000:4000'
-      build:
-        context: backend
-        dockerfile: Dockerfile
-      volumes:
-        - ./backend:/app
-        - /app/node_modules
-        - /app/prisma
-    frontend:
-      container_name: frontend
-      ports:
-        - '3000:3000'
-      build:
-        context: frontend
-        dockerfile: Dockerfile
-      volumes:
-        - ./frontend:/app
-        - /app/node_modules
-        - /app/.next
+  backend:
+    links:
+      - mysql
+    depends_on:
+      - mysql
+    container_name: backend
+    ports:
+      - '4000:4000'
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - /app/prisma
+  frontend:
+    container_name: frontend
+    ports:
+      - '3000:3000'
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
 
 volumes:
   mysql:
